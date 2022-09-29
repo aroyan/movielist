@@ -13,12 +13,13 @@ function DetailMovie() {
     overview,
     release_date: releaseDate,
     vote_average: voteAverage,
+    genres,
   } = detailMovie ?? {};
 
   useEffect(() => {
     const getDetailMovie = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${
+        `https://api.themoviedb.org/3/tv/${id}?api_key=${
           import.meta.env.VITE_TMDB_API_KEY
         }&language=en-US`
       );
@@ -35,6 +36,9 @@ function DetailMovie() {
         {releaseDate} - {voteAverage}
       </p>
       <p>{overview}</p>
+      {genres?.map((genre) => (
+        <p key={genre.id}>{genre.name}</p>
+      ))}
     </div>
   );
 }

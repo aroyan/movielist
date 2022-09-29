@@ -1,38 +1,66 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-unresolved */
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 import React, { useEffect, useState } from 'react';
+import '@splidejs/react-splide/css';
 import { Link } from 'react-router-dom';
+import Layout from '../../components/Layout';
 
 function Home() {
-  const [data, setData] = useState();
-  console.log(data);
+  const [dataHero, setDataHero] = useState(null);
 
   useEffect(() => {
-    const getData = async () => {
+    const getDataHero = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${
+        `https://api.themoviedb.org/3/trending/tv/week?api_key=${
           import.meta.env.VITE_TMDB_API_KEY
-        }&language=en-US&page=1`
+        }`
       );
       const result = await response.json();
-      setData(result.results);
+      setDataHero(result.results.slice(0, 6));
     };
-    getData();
+    getDataHero();
   }, []);
 
   return (
-    <div>
-      {data?.map((movie) => (
-        <div key={movie.id}>
-          <Link to={`/movie/${movie.id}`}>
-            <h2 className="text-green-600 font-bold text-2xl">{movie.title}</h2>
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt={movie.title}
-            />
-            <p>{movie.overview}</p>
-          </Link>
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <Splide
+        options={{
+          autoplay: true,
+          interval: 10000,
+          type: 'loop',
+          arrows: false,
+          keyboard: 'global',
+          pagination: true,
+        }}
+        className="w-full h-full"
+      >
+        {dataHero?.map((movie) => (
+          <SplideSlide key={movie.id}>
+            <Link to={`/movie/${movie.id}`}>
+              <div
+                className="w-full h-screen flex justify-center text-white text-4xl font-bold md:pl-16 pl-2 flex-col opacity-90"
+                style={{
+                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              >
+                <div className="max-w-sm z-10">
+                  <p>{movie.name ?? movie.title}</p>
+                  <p className="text-sm font-normal">{movie.overview}</p>
+                </div>
+              </div>
+            </Link>
+          </SplideSlide>
+        ))}
+      </Splide>
+      <article className="h-screen">
+        <p>Hello</p>
+        <p>This is detail movie</p>
+      </article>
+    </Layout>
   );
 }
 
