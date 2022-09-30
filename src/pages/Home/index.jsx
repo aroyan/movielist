@@ -25,40 +25,41 @@ function Home() {
   return (
     <Layout>
       <Splide
+        className="w-full h-full"
         options={{
-          autoplay: true,
-          interval: 10000,
-          type: 'loop',
+          type: '',
           arrows: false,
           keyboard: 'global',
-          pagination: true,
+          pagination: false,
         }}
-        className="w-full h-full"
       >
-        {dataHero?.map((movie) => (
-          <SplideSlide key={movie.id}>
-            <Link to={`/movie/${movie.id}`}>
-              <div
-                className="w-full h-screen flex justify-center text-white text-4xl font-bold md:pl-16 pl-2 flex-col opacity-90"
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                }}
-              >
-                <div className="max-w-sm z-10">
-                  <p>{movie.name ?? movie.title}</p>
-                  <p className="text-sm font-normal">{movie.overview}</p>
+        {dataHero ? (
+          dataHero?.map((movie) => (
+            <SplideSlide key={movie.id}>
+              <Link to={`/movie/${movie.id}`}>
+                <div
+                  className="w-full h-screen flex justify-center text-white text-4xl font-bold md:pl-16 pl-2 flex-col opacity-90"
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <div className="max-w-sm z-10">
+                    <p>{movie.name ?? movie.title}</p>
+                    <p className="text-sm font-normal">{movie.overview}</p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </SplideSlide>
-        ))}
+              </Link>
+            </SplideSlide>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
       </Splide>
-      <article className="h-screen">
-        <p>Hello</p>
-        <p>This is detail movie</p>
+      <article className="h-screen my-4">
+        <h2>Popular Movie</h2>
       </article>
     </Layout>
   );
