@@ -5,7 +5,7 @@ import clsx from 'clsx';
 function DetailMovie() {
   const [detailMovie, setDetailMovie] = useState(null);
 
-  const { id } = useParams();
+  const { media, id } = useParams();
 
   // Destructure null object
   const {
@@ -19,7 +19,7 @@ function DetailMovie() {
   useEffect(() => {
     const getDetailMovie = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}?api_key=${
+        `https://api.themoviedb.org/3/${media}/${id}?api_key=${
           import.meta.env.VITE_TMDB_API_KEY
         }&language=en-US`
       );
