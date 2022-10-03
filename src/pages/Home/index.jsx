@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-unresolved */
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import React, { useEffect, useState } from 'react';
@@ -8,6 +7,7 @@ import Layout from '../../components/Layout';
 
 function Home() {
   const [dataHero, setDataHero] = useState(null);
+
   // console.log(dataHero);
 
   useEffect(() => {
@@ -50,6 +50,16 @@ function Home() {
                   <div className="max-w-sm z-10">
                     <p>{movie.name ?? movie.title}</p>
                     <p className="text-sm font-normal">{movie.overview}</p>
+                    <button
+                      type="button"
+                      className="text-white bg-[#E50914] hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 z-10"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        alert('Open modal');
+                      }}
+                    >
+                      WATCH TRAILER
+                    </button>
                   </div>
                 </div>
               </Link>
@@ -68,30 +78,16 @@ function Home() {
             gap: '1rem',
             arrows: false,
             pagination: false,
+            breakpoints: {
+              1024: {
+                perPage: 6,
+              },
+              768: {
+                perPage: 3,
+              },
+            },
           }}
-          className="mx-4 hidden lg:block"
-        >
-          {dataHero?.map((movie) => (
-            <SplideSlide key={movie.id}>
-              <Link to={`/movie/${movie.id}`}>
-                <img
-                  className="rounded-md"
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt="asdasd"
-                />
-              </Link>
-            </SplideSlide>
-          ))}
-        </Splide>
-        {/* Mobile */}
-        <Splide
-          options={{
-            perPage: 3,
-            gap: '1rem',
-            arrows: false,
-            pagination: false,
-          }}
-          className="mx-4 block lg:hidden"
+          className="mx-4"
         >
           {dataHero?.map((movie) => (
             <SplideSlide key={movie.id}>
