@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import clsx from 'clsx';
+import Layout from '../../components/Layout';
 
 function DetailMovie() {
   const [detailMovie, setDetailMovie] = useState(null);
@@ -30,16 +30,16 @@ function DetailMovie() {
   }, []);
 
   return (
-    <div>
+    <Layout>
       <h1>{title}</h1>
-      <p className={clsx(voteAverage > 7 ? 'text-blue-600' : 'text-red-600')}>
+      <p>
         {releaseDate} - {voteAverage}
       </p>
       <p>{overview}</p>
       {genres?.map((genre) => (
         <p key={genre.id}>{genre.name}</p>
       ))}
-    </div>
+    </Layout>
   );
 }
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
 import DetailMovie from './pages/DetailMovie';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import SearchResult from './pages/SearchResult';
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/:media/:id" element={<DetailMovie />} />
-      <Route path="/search/:query" element={<SearchResult />} />
+      <Route path="/search" element={<SearchResult />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
