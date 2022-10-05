@@ -2,12 +2,13 @@
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import React, { useEffect, useState } from 'react';
 import '@splidejs/react-splide/css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   Box,
   Flex,
   Heading,
-  Text,
+  Image,
+  Link,
   //
 } from '@chakra-ui/react';
 import Layout from '../../components/Layout';
@@ -39,6 +40,8 @@ function Home() {
           arrows: false,
           keyboard: 'global',
           pagination: false,
+          autoplay: true,
+          interval: 5000,
         }}
       >
         {dataHero ? (
@@ -54,7 +57,9 @@ function Home() {
       <Box as="article" my="2rem" mx="1rem">
         <Flex align="center" justify="space-between">
           <Heading as="h2">Popular Movie</Heading>
-          <Text>View All</Text>
+          <Link to="/movie" as={NavLink}>
+            View All
+          </Link>
         </Flex>
         <Splide
           options={{
@@ -74,10 +79,13 @@ function Home() {
         >
           {dataMovie?.map((movie) => (
             <SplideSlide key={movie.id}>
-              <Link to={`/movie/${movie.id}`}>
-                <img
+              <Link to={`/movie/${movie.id}`} as={NavLink}>
+                <Image
+                  rounded="lg"
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  fallbackSrc="https://placekitten.com/200/300"
                   alt={movie.title ?? movie.name}
+                  objectFit="cover"
                 />
               </Link>
             </SplideSlide>
@@ -87,7 +95,9 @@ function Home() {
       <Box as="article" my="2rem" mx="1rem">
         <Flex align="center" justify="space-between">
           <Heading as="h2">Popular TV</Heading>
-          <Text>View All</Text>
+          <Link to="/tv" as={NavLink}>
+            View All
+          </Link>
         </Flex>
         <Splide
           options={{
@@ -107,10 +117,13 @@ function Home() {
         >
           {dataTv?.map((tv) => (
             <SplideSlide key={tv.id}>
-              <Link to={`/tv/${tv.id}`}>
-                <img
+              <Link to={`/tv/${tv.id}`} as={NavLink}>
+                <Image
+                  rounded="lg"
                   src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
+                  fallbackSrc="https://placekitten.com/200/300"
                   alt={tv.title ?? tv.name}
+                  objectFit="cover"
                 />
               </Link>
             </SplideSlide>

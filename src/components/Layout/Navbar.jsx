@@ -77,16 +77,10 @@ export default function Navbar() {
             display={{ base: 'none', md: 'inline-block' }}
             w="75px"
           >
-            Login
+            <Link to="/login">Login</Link>
           </Button>
-          <Button
-            variant="solid"
-            colorScheme="red"
-            size="sm"
-            mr={4}
-            rounded="full"
-          >
-            Register
+          <Button variant="solid" colorScheme="red" size="sm" rounded="full">
+            <Link to="/register">Register</Link>
           </Button>
         </Box>
       </Flex>
