@@ -59,7 +59,7 @@ function Tv() {
                   boxShadow="md"
                   rounded="lg"
                 >
-                  <Link to={`/movie/${tv.id}`} as={NavLink}>
+                  <Link to={`/tv/${tv.id}`} as={NavLink}>
                     <Image
                       rounded="lg"
                       src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
@@ -73,7 +73,6 @@ function Tv() {
                 </Box>
               ))
             : ''}
-          <br />
         </Flex>
         <Center flexDir="column">
           <Text mb="1rem">Page : {page}</Text>

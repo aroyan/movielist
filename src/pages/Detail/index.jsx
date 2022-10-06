@@ -23,7 +23,11 @@ import Layout from '../../components/Layout';
 function Detail() {
   const [movie, setMovie] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videos, setVideos] = useState(null);
+
+  const videoUrl = videos?.filter(
+    (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
+  )[0]?.key;
 
   const { media, id } = useParams();
 
@@ -45,7 +49,7 @@ function Detail() {
       }`
     );
     const result = await response.json();
-    setVideoUrl(result?.results[0].key);
+    setVideos(result?.results);
   };
 
   useEffect(() => {
@@ -115,13 +119,20 @@ function Detail() {
                     <ModalHeader>Play Trailer</ModalHeader>
                   </Box>
                   <ModalBody>
-                    <AspectRatio maxW="720px" ratio={16 / 9} margin="0 auto">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${videoUrl}`}
-                        title={movie.title ?? movie.name}
-                        allow="autoplay; fullscreen;"
-                      />
-                    </AspectRatio>
+                    {videoUrl ? (
+                      <AspectRatio maxW="720px" ratio={16 / 9} margin="0 auto">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${videoUrl}`}
+                          title={movie.title ?? movie.name}
+                          allow="autoplay; fullscreen;"
+                        />
+                      </AspectRatio>
+                    ) : (
+                      <Text color="white">
+                        Sorry, we cannot find trailer for this{' '}
+                        {media === 'tv' ? 'TV Series' : 'Movie'}
+                      </Text>
+                    )}
                   </ModalBody>
                 </ModalContent>
               </Modal>

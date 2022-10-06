@@ -19,9 +19,13 @@ import { TriangleDownIcon } from '@chakra-ui/icons';
 
 function HeroMovie({ movie }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videos, setVideos] = useState(null);
   const [movieId, setMovieId] = useState('');
   const [mediaType, setMediaType] = useState('');
+
+  const videoUrl = videos?.filter(
+    (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
+  )[0].key;
 
   const getVideo = async (_movieId, _mediaType) => {
     const response = await fetch(
@@ -30,7 +34,7 @@ function HeroMovie({ movie }) {
       }`
     );
     const result = await response.json();
-    setVideoUrl(result?.results[0].key);
+    setVideos(result?.results);
   };
 
   useEffect(() => {

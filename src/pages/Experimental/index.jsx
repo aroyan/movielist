@@ -15,8 +15,15 @@ import {
 } from '@chakra-ui/react';
 import Layout from '../../components/Layout';
 
-function SearchResult() {
+function Experimental() {
   const [searchResult, setSearchResult] = useState(null);
+  const [tvResult, setTvResult] = useState(null);
+
+  console.log(
+    searchResult && tvResult ? [...searchResult, ...tvResult] : 'Waiting...'
+  );
+
+  console.log(tvResult);
 
   const [searchParams, setSearchParams] = useSearchParams({
     page: 1,
@@ -29,9 +36,9 @@ function SearchResult() {
     import.meta.env.VITE_TMDB_API_KEY
   }&query=${query}&include_adult=false&page=${page}`;
 
-  // const SEARCH_TV_URL = `https://api.themoviedb.org/3/search/tv?api_key=${
-  //   import.meta.env.VITE_TMDB_API_KEY
-  // }&query=${query}&include_adult=false&page=${page}`;
+  const SEARCH_TV_URL = `https://api.themoviedb.org/3/search/tv?api_key=${
+    import.meta.env.VITE_TMDB_API_KEY
+  }&query=${query}&include_adult=false&page=${page}`;
 
   const handleDecrementPage = () => {
     setSearchParams({
@@ -55,12 +62,13 @@ function SearchResult() {
   };
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(SEARCH_MOVIE_URL);
+    const getData = async (url, _setterData) => {
+      const response = await fetch(url);
       const result = await response.json();
-      setSearchResult(result.results);
+      _setterData(result.results);
     };
-    getData();
+    getData(SEARCH_MOVIE_URL, setSearchResult);
+    getData(SEARCH_TV_URL, setTvResult);
   }, [query, page]);
 
   return (
@@ -128,4 +136,4 @@ function SearchResult() {
   );
 }
 
-export default SearchResult;
+export default Experimental;
