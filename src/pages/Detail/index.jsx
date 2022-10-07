@@ -16,7 +16,6 @@ import {
   AspectRatio,
   ModalHeader,
   Flex,
-  Skeleton,
 } from '@chakra-ui/react';
 import { TriangleDownIcon, StarIcon } from '@chakra-ui/icons';
 import Layout from '../../components/Layout';
@@ -142,9 +141,7 @@ function Detail() {
         </Box>
       ) : (
         <Box width="100vw" height="100vh">
-          <Box bg="red">
-            <Skeleton startColor="pink.500" endColor="orange.500" />
-          </Box>
+          <Text>Loading...</Text>
         </Box>
       )}
     </Layout>

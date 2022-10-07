@@ -10,7 +10,7 @@ import {
   Image,
   Link,
   Skeleton,
-
+  Text,
   //
 } from '@chakra-ui/react';
 import Layout from '../../components/Layout';
@@ -54,9 +54,7 @@ function Home() {
           ))
         ) : (
           <Box width="100vw" height="100vh">
-            <Box bg="red">
-              <Skeleton width="100vw" height="100vh" />
-            </Box>
+            <Text>Loading...</Text>
           </Box>
         )}
       </Splide>
@@ -90,7 +88,7 @@ function Home() {
                   <Image
                     rounded="lg"
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
+                    // fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
                     alt={movie.title ?? movie.name}
                     objectFit="cover"
                   />
@@ -157,7 +155,7 @@ function Home() {
                   <Image
                     rounded="lg"
                     src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
-                    fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
+                    // fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
                     alt={tv.title ?? tv.name}
                     objectFit="cover"
                   />
