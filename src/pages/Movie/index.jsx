@@ -54,7 +54,12 @@ function Movie() {
         <Heading as="h1" textAlign="center">
           Popular Movies
         </Heading>
-        <Flex my="1rem" wrap="wrap" gap="2rem" justify="center">
+        <Flex
+          my="1rem"
+          wrap="wrap"
+          gap={{ base: '1rem', md: '2rem' }}
+          justify="center"
+        >
           {data
             ? data?.map((movie) => (
                 <Box
@@ -67,7 +72,7 @@ function Movie() {
                     <Image
                       rounded="lg"
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      fallbackSrc="https://placekitten.com/200/300"
+                      fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
                       alt={movie.title ?? movie.name}
                       objectFit="cover"
                       width="200"

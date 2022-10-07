@@ -50,7 +50,12 @@ function Tv() {
         <Heading as="h1" textAlign="center">
           Popular TV Series
         </Heading>
-        <Flex my="1rem" wrap="wrap" gap="2rem" justify="center">
+        <Flex
+          my="1rem"
+          wrap="wrap"
+          gap={{ base: '1rem', md: '2rem' }}
+          justify="center"
+        >
           {data
             ? data?.map((tv) => (
                 <Box
@@ -63,7 +68,7 @@ function Tv() {
                     <Image
                       rounded="lg"
                       src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
-                      fallbackSrc="https://placekitten.com/200/300"
+                      fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
                       alt={tv.title ?? tv.name}
                       objectFit="cover"
                       width="200"

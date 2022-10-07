@@ -41,8 +41,8 @@ export default function Navbar() {
           colorScheme="red"
         />
 
-        <Heading color="red" as="h1">
-          <Link to="/">MovieList</Link>
+        <Heading color="red" as="h1" fontSize="3xl" letterSpacing="-2px">
+          <Link to="/">MOVIELIST</Link>
         </Heading>
         <FormControl
           as="form"

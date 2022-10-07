@@ -7,11 +7,12 @@ import App from './App';
 import 'swiper/css/bundle';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-  <ChakraProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ChakraProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <ChakraProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ChakraProvider>
+    /
+  </React.StrictMode>
 );

@@ -9,6 +9,8 @@ import {
   Heading,
   Image,
   Link,
+  Skeleton,
+
   //
 } from '@chakra-ui/react';
 import Layout from '../../components/Layout';
@@ -51,7 +53,11 @@ function Home() {
             </SplideSlide>
           ))
         ) : (
-          <p>Loading...</p>
+          <Box width="100vw" height="100vh">
+            <Box bg="red">
+              <Skeleton width="100vw" height="100vh" />
+            </Box>
+          </Box>
         )}
       </Splide>
       <Box as="article" my="2rem" mx="1rem">
@@ -77,19 +83,48 @@ function Home() {
             },
           }}
         >
-          {dataMovie?.map((movie) => (
-            <SplideSlide key={movie.id}>
-              <Link to={`/movie/${movie.id}`} as={NavLink}>
-                <Image
-                  rounded="lg"
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  fallbackSrc="https://placekitten.com/200/300"
-                  alt={movie.title ?? movie.name}
-                  objectFit="cover"
-                />
-              </Link>
-            </SplideSlide>
-          ))}
+          {dataMovie ? (
+            dataMovie?.map((movie) => (
+              <SplideSlide key={movie.id}>
+                <Link to={`/movie/${movie.id}`} as={NavLink}>
+                  <Image
+                    rounded="lg"
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
+                    alt={movie.title ?? movie.name}
+                    objectFit="cover"
+                  />
+                </Link>
+              </SplideSlide>
+            ))
+          ) : (
+            <Flex gap="1rem" wrap="wrap">
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+            </Flex>
+          )}
         </Splide>
       </Box>
       <Box as="article" my="2rem" mx="1rem">
@@ -115,19 +150,48 @@ function Home() {
             },
           }}
         >
-          {dataTv?.map((tv) => (
-            <SplideSlide key={tv.id}>
-              <Link to={`/tv/${tv.id}`} as={NavLink}>
-                <Image
-                  rounded="lg"
-                  src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
-                  fallbackSrc="https://placekitten.com/200/300"
-                  alt={tv.title ?? tv.name}
-                  objectFit="cover"
-                />
-              </Link>
-            </SplideSlide>
-          ))}
+          {dataTv ? (
+            dataTv?.map((tv) => (
+              <SplideSlide key={tv.id}>
+                <Link to={`/tv/${tv.id}`} as={NavLink}>
+                  <Image
+                    rounded="lg"
+                    src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
+                    fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
+                    alt={tv.title ?? tv.name}
+                    objectFit="cover"
+                  />
+                </Link>
+              </SplideSlide>
+            ))
+          ) : (
+            <Flex gap="1rem" wrap="wrap">
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+              <Skeleton
+                width={{ base: '100px', lg: '200px' }}
+                height={{ base: '155px', lg: '300px' }}
+              />
+            </Flex>
+          )}
         </Splide>
       </Box>
     </Layout>

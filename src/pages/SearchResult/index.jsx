@@ -5,18 +5,16 @@ import {
   Button,
   Center,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
   Image,
   Link,
-  Switch,
   Text,
 } from '@chakra-ui/react';
 import Layout from '../../components/Layout';
 
 function SearchResult() {
   const [searchResult, setSearchResult] = useState(null);
+  const [totalPages, setTotalPages] = useState(0);
 
   const [searchParams, setSearchParams] = useSearchParams({
     page: 1,
@@ -28,10 +26,6 @@ function SearchResult() {
   const SEARCH_MOVIE_URL = `https://api.themoviedb.org/3/search/movie?api_key=${
     import.meta.env.VITE_TMDB_API_KEY
   }&query=${query}&include_adult=false&page=${page}`;
-
-  // const SEARCH_TV_URL = `https://api.themoviedb.org/3/search/tv?api_key=${
-  //   import.meta.env.VITE_TMDB_API_KEY
-  // }&query=${query}&include_adult=false&page=${page}`;
 
   const handleDecrementPage = () => {
     setSearchParams({
@@ -47,18 +41,12 @@ function SearchResult() {
     });
   };
 
-  const handleShowTv = () => {
-    setSearchParams({
-      q: query,
-      page: +searchParams.get('page'),
-    });
-  };
-
   useEffect(() => {
     const getData = async () => {
       const response = await fetch(SEARCH_MOVIE_URL);
       const result = await response.json();
       setSearchResult(result.results);
+      setTotalPages(result.total_pages);
     };
     getData();
   }, [query, page]);
@@ -69,14 +57,13 @@ function SearchResult() {
         <Heading as="h1" textAlign="center">
           Search result for {query}
         </Heading>
-        <FormControl display="flex" alignItems="center" justifyContent="center">
-          <FormLabel htmlFor="email-alerts" mb="0">
-            Show TV series result instead?
-          </FormLabel>
-          <Switch id="email-alerts" onChange={handleShowTv} />
-        </FormControl>
 
-        <Flex my="1rem" wrap="wrap" gap="2rem" justify="center">
+        <Flex
+          my="1rem"
+          wrap="wrap"
+          gap={{ base: '1rem', md: '2rem' }}
+          justify="center"
+        >
           {searchResult?.map((res) => (
             <Box
               key={res.id}
@@ -88,7 +75,7 @@ function SearchResult() {
                 <Image
                   rounded="lg"
                   src={`https://image.tmdb.org/t/p/w500${res.poster_path}`}
-                  fallbackSrc="https://placekitten.com/200/300"
+                  fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
                   alt={res.title ?? res.name}
                   objectFit="cover"
                   width="200"
@@ -98,34 +85,56 @@ function SearchResult() {
             </Box>
           ))}
         </Flex>
-        <Center flexDir="column">
-          <Text mb="1rem">Page : {page}</Text>
-          <Flex gap="0.5rem">
-            <Button
-              colorScheme="facebook"
-              rounded="full"
-              disabled={page <= 1}
-              onClick={handleDecrementPage}
-            >
-              {+page === 1 ? '' : +page - 1}
-            </Button>
-            <Button disabled rounded="full" colorScheme="orange">
-              {page}
-            </Button>
-            <Button
-              colorScheme="facebook"
-              rounded="full"
-              type="button"
-              disabled={page >= 500}
-              onClick={handleIncrementPage}
-            >
-              {+page + 1}
-            </Button>
-          </Flex>
-        </Center>
+        {searchResult?.length > 0 ? (
+          <Center flexDir="column">
+            <Text mb="1rem">Page : {page}</Text>
+            <Flex gap="0.5rem">
+              <Button
+                colorScheme="facebook"
+                rounded="full"
+                disabled={page <= 1}
+                onClick={handleDecrementPage}
+              >
+                {+page === 1 ? '' : +page - 1}
+              </Button>
+              <Button disabled rounded="full" colorScheme="orange">
+                {page}
+              </Button>
+              <Button
+                colorScheme="facebook"
+                rounded="full"
+                type="button"
+                disabled={page >= totalPages}
+                onClick={handleIncrementPage}
+              >
+                {+page === totalPages ? '' : +page + 1}
+              </Button>
+            </Flex>
+          </Center>
+        ) : (
+          <Center>
+            <Text>Sorry, {query} not found</Text>
+          </Center>
+        )}
       </Box>
     </Layout>
   );
 }
 
 export default SearchResult;
+
+// Todos: Implement button search tv series
+
+// const handleShowTv = () => {
+//   setSearchParams({
+//     q: query,
+//     page: +searchParams.get('page'),
+//   });
+// };
+
+/* <FormControl display="flex" alignItems="center" justifyContent="center">
+          <FormLabel htmlFor="email-alerts" mb="0">
+            Show TV series result instead?
+          </FormLabel>
+          <Switch id="email-alerts" onChange={handleShowTv} />
+        </FormControl> */
