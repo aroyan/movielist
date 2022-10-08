@@ -5,6 +5,7 @@ import {
   Input,
   IconButton,
   Button,
+  Link,
   useDisclosure,
   InputGroup,
   InputRightElement,
@@ -12,7 +13,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,8 +42,14 @@ export default function Navbar() {
           colorScheme="red"
         />
 
-        <Heading color="red" as="h1" fontSize="3xl" letterSpacing="-2px">
-          <Link to="/">MOVIELIST</Link>
+        <Heading
+          color="red"
+          fontSize="3xl"
+          letterSpacing="-2px"
+          as={NavLink}
+          to="/"
+        >
+          MOVIELIST
         </Heading>
         <FormControl
           as="form"
@@ -68,20 +75,24 @@ export default function Navbar() {
         </FormControl>
 
         <Box>
-          <Button
-            variant="outline"
-            colorScheme="red"
-            size="sm"
-            mr={4}
-            rounded="full"
-            display={{ base: 'none', md: 'inline-block' }}
-            w="75px"
-          >
-            <Link to="/login">Login</Link>
-          </Button>
-          <Button variant="solid" colorScheme="red" size="sm" rounded="full">
-            <Link to="/register">Register</Link>
-          </Button>
+          <Link as={NavLink} to="/login">
+            <Button
+              variant="outline"
+              colorScheme="red"
+              size="sm"
+              mr={4}
+              rounded="full"
+              display={{ base: 'none', md: 'inline-block' }}
+              w="75px"
+            >
+              Login
+            </Button>
+          </Link>
+          <Link as={NavLink} to="/register" _hover={{ textDecor: 'none' }}>
+            <Button colorScheme="red" rounded="full" size="sm">
+              Register
+            </Button>
+          </Link>
         </Box>
       </Flex>
 

@@ -112,7 +112,7 @@ function SearchResult() {
             </Flex>
           </Center>
         ) : (
-          <Center>
+          <Center height="calc(100vh - 200px)" align="center">
             <Text>Sorry, {query} not found</Text>
           </Center>
         )}
