@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { TriangleDownIcon, StarIcon } from '@chakra-ui/icons';
 import Layout from '../../components/Layout';
+import Loading from '../../components/Loading';
 
 function Detail() {
   const [movie, setMovie] = useState(null);
@@ -31,16 +32,19 @@ function Detail() {
 
   const { media, id } = useParams();
 
-  // Destructure null object
   const {
     backdrop_path: backdropPath,
     title,
     original_name: originalName,
     overview,
+    first_air_date: firstAirDate,
     release_date: releaseDate,
     vote_average: voteAverage,
     genres,
   } = movie ?? {};
+
+  const releaseYear = new Date(releaseDate).getFullYear();
+  const firstAirYear = new Date(firstAirDate).getFullYear();
 
   const getVideo = async (_movieId) => {
     const response = await fetch(
@@ -86,9 +90,13 @@ function Detail() {
             background="rgba(0,0,0,0.5)"
           >
             <Flex maxW="xl" m="2rem" flexDir="column" gap="1rem">
-              <Heading>{title ?? originalName}</Heading>
-              <Text>{releaseDate}</Text>
-              <HStack>
+              <Heading>
+                {title ?? originalName}{' '}
+                <Badge colorScheme="green">
+                  {Number.isNaN(releaseYear) ? firstAirYear : releaseYear}
+                </Badge>
+              </Heading>
+              <HStack wrap="wrap" gap="1">
                 {genres.map((genre) => (
                   <Badge key={genre.id} colorScheme="cyan">
                     {genre.name}
@@ -140,9 +148,7 @@ function Detail() {
           </Box>
         </Box>
       ) : (
-        <Box width="100vw" height="100vh">
-          <Text>Loading...</Text>
-        </Box>
+        <Loading />
       )}
     </Layout>
   );

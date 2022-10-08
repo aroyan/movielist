@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-unresolved */
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import React, { useEffect, useState } from 'react';
@@ -5,16 +7,18 @@ import '@splidejs/react-splide/css';
 import { NavLink } from 'react-router-dom';
 import {
   Box,
+  CircularProgress,
+  CircularProgressLabel,
   Flex,
   Heading,
   Image,
   Link,
   Skeleton,
-  Text,
   //
 } from '@chakra-ui/react';
 import Layout from '../../components/Layout';
 import HeroMovie from '../../components/HeroMovie';
+import Loading from '../../components/Loading';
 import { TRENDING_URL, MOVIE_URL, TV_URL } from '../../const/endpoints';
 
 function Home() {
@@ -53,9 +57,7 @@ function Home() {
             </SplideSlide>
           ))
         ) : (
-          <Box width="100vw" height="100vh">
-            <Text>Loading...</Text>
-          </Box>
+          <Loading />
         )}
       </Splide>
       <Box as="article" my="2rem" mx="1rem">
@@ -93,6 +95,25 @@ function Home() {
                     objectFit="cover"
                   />
                 </Link>
+                <CircularProgress
+                  mt="-76px"
+                  value={movie.vote_average * 10}
+                  color={
+                    movie.vote_average * 10 > 70
+                      ? 'green.400'
+                      : movie.vote_average * 10 > 50
+                      ? 'yellow.400'
+                      : 'red.400'
+                  }
+                  bg="gray.600"
+                  rounded="full"
+                  p="1px"
+                  size="48px"
+                >
+                  <CircularProgressLabel color="white">
+                    {movie.vote_average * 10}%
+                  </CircularProgressLabel>
+                </CircularProgress>
               </SplideSlide>
             ))
           ) : (
@@ -160,6 +181,25 @@ function Home() {
                     objectFit="cover"
                   />
                 </Link>
+                <CircularProgress
+                  mt="-76px"
+                  value={tv.vote_average * 10}
+                  color={
+                    tv.vote_average * 10 > 70
+                      ? 'green.400'
+                      : tv.vote_average * 10 > 50
+                      ? 'yellow.400'
+                      : 'red.400'
+                  }
+                  bg="gray.600"
+                  rounded="full"
+                  p="1px"
+                  size="48px"
+                >
+                  <CircularProgressLabel color="white">
+                    {tv.vote_average * 10}%
+                  </CircularProgressLabel>
+                </CircularProgress>
               </SplideSlide>
             ))
           ) : (
