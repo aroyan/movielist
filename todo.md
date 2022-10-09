@@ -1,5 +1,0 @@
-- Pagination using useSearchParams
-- Implement Infinite Scroll
-- Login and Register page
-- Skeleton
-- Dark mode?
