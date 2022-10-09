@@ -17,6 +17,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { NavLink } from 'react-router-dom';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,11 +32,8 @@ export default function Register() {
       <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
         <Stack align="center">
           <Heading fontSize="4xl" textAlign="center">
-            Sign up
+            Register
           </Heading>
-          <Text fontSize="lg" color="gray.600">
-            to enjoy all of our cool features ✌️
-          </Text>
         </Stack>
         <Box
           rounded="lg"
@@ -86,13 +84,18 @@ export default function Register() {
                   bg: 'blue.500',
                 }}
               >
-                Sign up
+                Register
               </Button>
             </Stack>
             <Stack pt={6}>
               <Text align="center">
-                Already a user?{' '}
-                <Link color="blue.400" to="/login">
+                Already have an account?{' '}
+                <Link
+                  color="blue.700"
+                  to="/login"
+                  fontWeight="semibold"
+                  as={NavLink}
+                >
                   Login
                 </Link>
               </Text>

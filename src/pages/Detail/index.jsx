@@ -23,14 +23,14 @@ import Loading from '../../components/Loading';
 
 function Detail() {
   const [movie, setMovie] = useState(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [videos, setVideos] = useState(null);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { media, id } = useParams();
 
   const videoUrl = videos?.filter(
     (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
   )[0]?.key;
-
-  const { media, id } = useParams();
 
   const {
     backdrop_path: backdropPath,

@@ -5,14 +5,13 @@ import {
   Button,
   Box,
   Heading,
-  Image,
-  Link,
   Text,
   Flex,
   Center,
   //
 } from '@chakra-ui/react';
-import { useSearchParams, NavLink } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import CardMovie from '../../components/CardMovie';
 import Layout from '../../components/Layout';
 
 function Movie() {
@@ -68,17 +67,7 @@ function Movie() {
                   boxShadow="md"
                   rounded="lg"
                 >
-                  <Link to={`/movie/${movie.id}`} as={NavLink}>
-                    <Image
-                      rounded="lg"
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
-                      alt={movie.title ?? movie.name}
-                      objectFit="cover"
-                      width="200"
-                    />
-                    <Text>{movie.name ?? movie.original_name}</Text>
-                  </Link>
+                  <CardMovie data={movie} mediaType="movie" />
                 </Box>
               ))
             : ''}

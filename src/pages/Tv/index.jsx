@@ -5,15 +5,14 @@ import {
   Button,
   Box,
   Heading,
-  Image,
-  Link,
   Text,
   Flex,
   Center,
   //
 } from '@chakra-ui/react';
-import { useSearchParams, NavLink } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Layout from '../../components/Layout';
+import CardMovie from '../../components/CardMovie';
 
 function Tv() {
   const [data, setData] = useState(null);
@@ -64,17 +63,7 @@ function Tv() {
                   boxShadow="md"
                   rounded="lg"
                 >
-                  <Link to={`/tv/${tv.id}`} as={NavLink}>
-                    <Image
-                      rounded="lg"
-                      src={`https://image.tmdb.org/t/p/w500${tv.poster_path}`}
-                      fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
-                      alt={tv.title ?? tv.name}
-                      objectFit="cover"
-                      width="200"
-                    />
-                    <Text>{tv.name ?? tv.original_name}</Text>
-                  </Link>
+                  <CardMovie data={tv} mediaType="tv" />
                 </Box>
               ))
             : ''}
