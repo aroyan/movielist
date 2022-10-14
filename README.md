@@ -2,6 +2,11 @@
 
 > [Live Demo](https://whyw.vercel.app/)
 
+## Features
+
+- Search
+- Pagination
+
 ## Acknowledgments
 
 - [Chakra UI](https://chakra-ui.com/)
