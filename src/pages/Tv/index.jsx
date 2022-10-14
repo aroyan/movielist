@@ -11,8 +11,8 @@ import {
   //
 } from '@chakra-ui/react';
 import { useSearchParams } from 'react-router-dom';
-import Layout from '../../components/Layout';
-import CardMovie from '../../components/CardMovie';
+import Layout from '@/components/Layout';
+import CardMovie from '@/components/CardMovie';
 
 function Tv() {
   const [data, setData] = useState(null);

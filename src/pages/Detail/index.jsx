@@ -18,8 +18,8 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { TriangleDownIcon, StarIcon } from '@chakra-ui/icons';
-import Layout from '../../components/Layout';
-import Loading from '../../components/Loading';
+import Layout from '@/components/Layout';
+import Loading from '@/components/Loading';
 
 function Detail() {
   const [movie, setMovie] = useState(null);

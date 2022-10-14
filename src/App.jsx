@@ -1,13 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Detail from './pages/Detail';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Movie from './pages/Movie';
-import NotFound from './pages/NotFound';
-import SearchResult from './pages/SearchResult';
-import Tv from './pages/Tv';
+import Detail from '@/pages/Detail';
+import Home from '@/pages/Home';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import Movie from '@/pages/Movie';
+import NotFound from '@/pages/NotFound';
+import SearchResult from '@/pages/SearchResult';
+import Tv from '@/pages/Tv';
 
 function App() {
   return (

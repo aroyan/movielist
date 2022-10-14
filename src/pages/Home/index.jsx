@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -11,13 +10,13 @@ import {
   Link,
   //
 } from '@chakra-ui/react';
-import CardSkeleton from '../../components/CardSkeleton';
-import CircularRating from '../../components/CircularRating';
-import Layout from '../../components/Layout';
-import Loading from '../../components/Loading';
-import HeroMovie from '../../components/HeroMovie';
-import { TRENDING_URL, MOVIE_URL, TV_URL } from '../../const/endpoints';
-import CardMovie from '../../components/CardMovie';
+import CardSkeleton from '@/components/CardSkeleton';
+import CircularRating from '@/components/CircularRating';
+import Layout from '@/components/Layout';
+import Loading from '@/components/Loading';
+import HeroMovie from '@/components/HeroMovie';
+import { TRENDING_URL, MOVIE_URL, TV_URL } from '@/const/endpoints';
+import CardMovie from '@/components/CardMovie';
 
 function Home() {
   const [dataHero, setDataHero] = useState(null);
