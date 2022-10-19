@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Button,
   Box,
@@ -11,29 +11,17 @@ import {
   //
 } from '@chakra-ui/react';
 import { useSearchParams } from 'react-router-dom';
+
 import CardMovie from '@/components/CardMovie';
 import Layout from '@/components/Layout';
+import { useGetAllMoviesQuery } from '@/features/movie/movieSlice';
 
 function Movie() {
-  const [data, setData] = useState(null);
-
   const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
 
   const page = searchParams.get('page');
 
-  const fetchData = async (_url, _stateSetter) => {
-    const response = await fetch(_url);
-    const result = await response.json();
-    _stateSetter(result.results);
-  };
-
-  const MOVIE_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${
-    import.meta.env.VITE_TMDB_API_KEY
-  }&page=${page}`;
-
-  useEffect(() => {
-    fetchData(MOVIE_URL, setData);
-  }, []);
+  const { data: movies } = useGetAllMoviesQuery(page);
 
   const handleDecrementPage = () => {
     setSearchParams({ page: +searchParams.get('page') - 1 });
@@ -43,24 +31,15 @@ function Movie() {
     setSearchParams({ page: +searchParams.get('page') + 1 });
   };
 
-  useEffect(() => {
-    fetchData(MOVIE_URL, setData);
-  }, [page]);
-
   return (
     <Layout>
       <Box as="section" mt="64px" mx="1rem" mb="2rem">
         <Heading as="h1" textAlign="center">
           Popular Movies
         </Heading>
-        <Flex
-          my="1rem"
-          wrap="wrap"
-          gap={{ base: '1rem', md: '2rem' }}
-          justify="center"
-        >
-          {data
-            ? data?.map((movie) => (
+        <Flex my="1rem" wrap="wrap" gap={{ base: '1rem', md: '2rem' }} justify="center">
+          {movies
+            ? movies?.results?.map((movie) => (
                 <Box
                   key={movie.id}
                   width={{ base: '150px', md: '200px' }}

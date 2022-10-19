@@ -18,8 +18,10 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { TriangleDownIcon, StarIcon } from '@chakra-ui/icons';
+
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
+import { useGetTrailerQuery } from '@/features/movie/movieSlice';
 
 function Detail() {
   const [movie, setMovie] = useState(null);
@@ -28,9 +30,11 @@ function Detail() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { media, id } = useParams();
 
-  const videoUrl = videos?.filter(
-    (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
-  )[0]?.key;
+  const videoUrl = videos?.filter((vid) => vid.type === 'Trailer' && vid.site === 'YouTube')[0]?.key;
+
+  const { data } = useGetTrailerQuery(media, id);
+
+  console.log(data);
 
   const {
     backdrop_path: backdropPath,
@@ -48,9 +52,7 @@ function Detail() {
 
   const getVideo = async (_movieId) => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/${media}/${_movieId}/videos?api_key=${
-        import.meta.env.VITE_TMDB_API_KEY
-      }`
+      `https://api.themoviedb.org/3/${media}/${_movieId}/videos?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
     );
     const result = await response.json();
     setVideos(result?.results);
@@ -92,9 +94,7 @@ function Detail() {
             <Flex maxW="xl" m="2rem" flexDir="column" gap="1rem">
               <Heading>
                 {title ?? originalName}{' '}
-                <Badge colorScheme="green">
-                  {Number.isNaN(releaseYear) ? firstAirYear : releaseYear}
-                </Badge>
+                <Badge colorScheme="green">{Number.isNaN(releaseYear) ? firstAirYear : releaseYear}</Badge>
               </Heading>
               <HStack wrap="wrap" gap="1">
                 {genres.map((genre) => (
@@ -137,8 +137,7 @@ function Detail() {
                       </AspectRatio>
                     ) : (
                       <Text color="white">
-                        Sorry, we cannot find trailer for this{' '}
-                        {media === 'tv' ? 'TV Series' : 'Movie'}
+                        Sorry, we cannot find trailer for this {media === 'tv' ? 'TV Series' : 'Movie'}
                       </Text>
                     )}
                   </ModalBody>

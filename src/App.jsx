@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import Detail from '@/pages/Detail';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
@@ -8,6 +9,7 @@ import Movie from '@/pages/Movie';
 import NotFound from '@/pages/NotFound';
 import SearchResult from '@/pages/SearchResult';
 import Tv from '@/pages/Tv';
+// import Protected from '@/components/Routes/Protected';
 
 function App() {
   return (
@@ -16,7 +18,11 @@ function App() {
       <Route path="/:media/:id" element={<Detail />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/movie" element={<Movie />} />
+      <Route
+        path="/movie"
+        // prettier-ignore
+        element={<Movie />}
+      />
       <Route path="/search" element={<SearchResult />} />
       <Route path="/tv" element={<Tv />} />
       <Route path="*" element={<NotFound />} />
