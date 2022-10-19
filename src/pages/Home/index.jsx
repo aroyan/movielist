@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { NavLink } from 'react-router-dom';
@@ -10,24 +10,23 @@ import {
   Link,
   //
 } from '@chakra-ui/react';
+
 import CardSkeleton from '@/components/CardSkeleton';
 import CircularRating from '@/components/CircularRating';
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
 import HeroMovie from '@/components/HeroMovie';
-import { TRENDING_URL, MOVIE_URL, TV_URL } from '@/const/endpoints';
 import CardMovie from '@/components/CardMovie';
+import {
+  useGetAllMoviesQuery,
+  useGetAllSeriesQuery,
+  useGetWeeklyTrendingQuery,
+} from '@/features/movie/movieSlice';
 
 function Home() {
-  const [dataHero, setDataHero] = useState(null);
-  const [dataMovie, setDataMovie] = useState(null);
-  const [dataTv, setDataTv] = useState(null);
-
-  const fetchData = async (_url, _stateSetter) => {
-    const response = await fetch(_url);
-    const result = await response.json();
-    _stateSetter(result.results);
-  };
+  const { data: movies } = useGetAllMoviesQuery();
+  const { data: tvSeries } = useGetAllSeriesQuery();
+  const { data: trending } = useGetWeeklyTrendingQuery();
 
   const movieSliderOptions = {
     perPage: 6,
@@ -53,17 +52,11 @@ function Home() {
     interval: 5000,
   };
 
-  useEffect(() => {
-    fetchData(TRENDING_URL, setDataHero);
-    fetchData(MOVIE_URL, setDataMovie);
-    fetchData(TV_URL, setDataTv);
-  }, []);
-
   return (
     <Layout>
       <Splide options={heroSliderOptions}>
-        {dataHero ? (
-          dataHero?.slice(0, 5).map((movie) => (
+        {trending ? (
+          trending?.results?.slice(0, 5).map((movie) => (
             <SplideSlide key={movie.id}>
               <HeroMovie movie={movie} />
             </SplideSlide>
@@ -80,8 +73,8 @@ function Home() {
           </Link>
         </Flex>
         <Splide options={movieSliderOptions}>
-          {dataMovie ? (
-            dataMovie?.map((movie) => (
+          {movies ? (
+            movies?.results?.map((movie) => (
               <SplideSlide key={movie.id}>
                 <CardMovie data={movie} mediaType="movie" />
                 <CircularRating data={movie.vote_average} />
@@ -100,8 +93,8 @@ function Home() {
           </Link>
         </Flex>
         <Splide options={movieSliderOptions}>
-          {dataTv ? (
-            dataTv?.map((tv) => (
+          {tvSeries ? (
+            tvSeries?.results?.map((tv) => (
               <SplideSlide key={tv.id}>
                 <CardMovie data={tv} mediaType="tv" />
                 <CircularRating data={tv.vote_average} />

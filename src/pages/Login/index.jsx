@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Flex,
   Box,
@@ -11,13 +11,19 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import LoginWithGoogle from '@/components/LoginWithGoogle';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/regex';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+  const toast = useToast();
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -26,6 +32,14 @@ function Login() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <Flex
@@ -55,9 +69,30 @@ function Login() {
                 bg: 'blue.500',
               }}
               disabled={!EMAIL_REGEX.test(email) || !PASSWORD_REGEX.test(password)}
+              onClick={() => {
+                toast({
+                  title: 'Informesyen',
+                  description: 'Not implemented yet',
+                  status: 'info',
+                  duration: 2000,
+                  isClosable: true,
+                });
+              }}
             >
               Login
             </Button>
+            <LoginWithGoogle
+              type="Login"
+              onClick={() => {
+                toast({
+                  title: 'Informesyen',
+                  description: 'Not implemented yet',
+                  status: 'info',
+                  duration: 2000,
+                  isClosable: true,
+                });
+              }}
+            />
             <Text my="4">
               Don&apos;t have an account yet?{' '}
               <Link to="/register" as={NavLink} color="blue.700" fontWeight="semibold">

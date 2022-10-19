@@ -18,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
+
+import LoginWithGoogle from '@/components/LoginWithGoogle';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/regex';
 
 export default function Register() {
@@ -91,10 +93,9 @@ export default function Register() {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <Stack spacing={10} pt={2}>
+            <Stack spacing={4} pt={2}>
               <Button
                 loadingText="Submitting"
-                size="lg"
                 bg="blue.400"
                 color="white"
                 _hover={{
@@ -104,6 +105,7 @@ export default function Register() {
               >
                 Register
               </Button>
+              <LoginWithGoogle type="Register" />
             </Stack>
             <Stack pt={6}>
               <Text align="center">

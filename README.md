@@ -1,6 +1,6 @@
-# Challenge 5 | Movie Lists
+# Challenge 5 & 6 | Movie Lists & Authentication
 
-> [Live Demo](https://whyw.vercel.app/)
+> [Live Preview](https://whyw.vercel.app/)
 
 ## Features
 
