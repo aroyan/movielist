@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSearchParams, NavLink } from 'react-router-dom';
 import {
   Box,
@@ -9,13 +9,13 @@ import {
   Image,
   Link,
   Text,
+  //
 } from '@chakra-ui/react';
+
 import Layout from '@/components/Layout';
+import { useGetSearchDataQuery } from '@/features/movie/movieSlice';
 
 function SearchResult() {
-  const [searchResult, setSearchResult] = useState(null);
-  const [totalPages, setTotalPages] = useState(0);
-
   const [searchParams, setSearchParams] = useSearchParams({
     page: 1,
   });
@@ -23,9 +23,11 @@ function SearchResult() {
   const query = searchParams.get('q');
   const page = searchParams.get('page');
 
-  const SEARCH_MOVIE_URL = `https://api.themoviedb.org/3/search/movie?api_key=${
-    import.meta.env.VITE_TMDB_API_KEY
-  }&query=${query}&include_adult=false&page=${page}`;
+  const { data } = useGetSearchDataQuery({ q: query, page });
+
+  const filteredData = data?.results?.filter((item) => item.media_type !== 'person') ?? [];
+
+  const { total_pages: totalPages } = data ?? {};
 
   const handleDecrementPage = () => {
     setSearchParams({
@@ -41,16 +43,6 @@ function SearchResult() {
     });
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(SEARCH_MOVIE_URL);
-      const result = await response.json();
-      setSearchResult(result.results);
-      setTotalPages(result.total_pages);
-    };
-    getData();
-  }, [query, page]);
-
   return (
     <Layout>
       <Box as="section" mt="64px" mx="1rem" mb="2rem">
@@ -58,20 +50,10 @@ function SearchResult() {
           Search result for {query}
         </Heading>
 
-        <Flex
-          my="1rem"
-          wrap="wrap"
-          gap={{ base: '1rem', md: '2rem' }}
-          justify="center"
-        >
-          {searchResult?.map((res) => (
-            <Box
-              key={res.id}
-              width={{ base: '150px', md: '200px' }}
-              boxShadow="md"
-              rounded="lg"
-            >
-              <Link to={`/movie/${res.id}`} as={NavLink}>
+        <Flex my="1rem" wrap="wrap" gap={{ base: '1rem', md: '2rem' }} justify="center">
+          {filteredData?.map((res) => (
+            <Box key={res.id} width={{ base: '150px', md: '200px' }} boxShadow="md" rounded="lg">
+              <Link to={`/${res.media_type}/${res.id}`} as={NavLink}>
                 <Image
                   rounded="lg"
                   src={`https://image.tmdb.org/t/p/w500${res.poster_path}`}
@@ -85,16 +67,11 @@ function SearchResult() {
             </Box>
           ))}
         </Flex>
-        {searchResult?.length > 0 ? (
+        {filteredData?.length > 0 ? (
           <Center flexDir="column">
             <Text mb="1rem">Page : {page}</Text>
             <Flex gap="0.5rem">
-              <Button
-                colorScheme="facebook"
-                rounded="full"
-                disabled={page <= 1}
-                onClick={handleDecrementPage}
-              >
+              <Button colorScheme="facebook" rounded="full" disabled={page <= 1} onClick={handleDecrementPage}>
                 {+page === 1 ? '' : +page - 1}
               </Button>
               <Button disabled rounded="full" colorScheme="orange">
@@ -122,19 +99,3 @@ function SearchResult() {
 }
 
 export default SearchResult;
-
-// Todos: Implement button search tv series
-
-// const handleShowTv = () => {
-//   setSearchParams({
-//     q: query,
-//     page: +searchParams.get('page'),
-//   });
-// };
-
-/* <FormControl display="flex" alignItems="center" justifyContent="center">
-          <FormLabel htmlFor="email-alerts" mb="0">
-            Show TV series result instead?
-          </FormLabel>
-          <Switch id="email-alerts" onChange={handleShowTv} />
-        </FormControl> */
