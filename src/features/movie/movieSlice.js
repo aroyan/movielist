@@ -14,10 +14,10 @@ export const movieApi = createApi({
       query: () => `trending/all/week?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
     }),
     getDetailData: builder.query({
-      query: (media, id) => `${media}/${id}/?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
+      query: ({ media, id }) => `${media}/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
     }),
     getTrailer: builder.query({
-      query: (media, mediaId) => `${media}/${mediaId}/videos?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
+      query: ({ media, id }) => `${media}/${id}/videos?api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
     }),
   }),
 });
