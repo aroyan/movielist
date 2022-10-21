@@ -9,13 +9,21 @@ import Movie from '@/pages/Movie';
 import NotFound from '@/pages/NotFound';
 import SearchResult from '@/pages/SearchResult';
 import Tv from '@/pages/Tv';
-// import Protected from '@/components/Routes/Protected';
+import Protected from '@/components/Routes/Protected';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/:media/:id" element={<Detail />} />
+      <Route
+        path="/:media/:id"
+        // prettier-ignore
+        element={(
+          <Protected>
+            <Detail />
+          </Protected>
+      )}
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route
