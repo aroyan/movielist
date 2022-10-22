@@ -1,4 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
 import React, { useEffect, useState } from 'react';
 import {
   Flex,
@@ -164,24 +163,29 @@ export default function Register() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" value={firstName} onChange={handleFirstName} />
+                  <Input type="text" value={firstName} onChange={handleFirstName} placeholder="First name" />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" value={lastName} onChange={handleLastName} />
+                  <Input type="text" value={lastName} onChange={handleLastName} placeholder="Last name" />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" value={email} onChange={handleEmail} />
+              <Input type="email" value={email} onChange={handleEmail} placeholder="example@mail.com" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} value={password} onChange={handlePassword} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={handlePassword}
+                  placeholder="Password"
+                />
                 <InputRightElement h="full">
                   <Button variant="ghost" onClick={() => setShowPassword(() => !showPassword)}>
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -196,6 +200,7 @@ export default function Register() {
                   type={showPassword ? 'text' : 'password'}
                   value={confirmPassword}
                   onChange={handleConfirmPassword}
+                  placeholder="Confirm password"
                 />
                 <InputRightElement h="full">
                   <Button variant="ghost" onClick={() => setShowPassword(() => !showPassword)}>

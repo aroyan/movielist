@@ -144,7 +144,7 @@ function Login() {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" value={email} onChange={handleEmail} isRequired />
+              <Input type="email" value={email} onChange={handleEmail} isRequired placeholder="example@mail.com" />
               <FormHelperText
                 color="orange.400"
                 display={EMAIL_REGEX.test(email) || email.length < 3 ? 'none' : 'block'}
@@ -155,7 +155,7 @@ function Login() {
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" value={password} onChange={handlePassword} isRequired />
+              <Input type="password" value={password} onChange={handlePassword} isRequired placeholder="Password" />
               <FormHelperText
                 color="orange.400"
                 display={PASSWORD_REGEX.test(password) || password.length < 8 ? 'none' : 'block'}
