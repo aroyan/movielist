@@ -36,6 +36,7 @@ const store = configureStore({
       ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }).concat(movieApi.middleware),
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 export default store;
