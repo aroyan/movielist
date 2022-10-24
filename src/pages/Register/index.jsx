@@ -1,4 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
 import React, { useEffect, useState } from 'react';
 import {
   Flex,
@@ -133,21 +132,23 @@ export default function Register() {
 
   // Verify on first open if token is valid or not
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`${baseUrl}api/v1/auth/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const verifyResult = await response.status;
-      if (verifyResult === 401) {
-        localStorage.removeItem('token');
-        dispatch(setUser({ name: null, email: null }));
-      }
-      if (verifyResult === 200) {
-        navigate('/');
-      }
-    })();
+    if (token) {
+      (async () => {
+        const response = await fetch(`${baseUrl}api/v1/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const verifyResult = await response.status;
+        if (verifyResult === 401) {
+          localStorage.removeItem('token');
+          dispatch(setUser({ name: null, email: null }));
+        }
+        if (verifyResult === 200) {
+          navigate('/');
+        }
+      })();
+    }
   }, []);
 
   return (

@@ -13,12 +13,12 @@ import {
   FormHelperText,
   InputRightElement,
   useColorModeValue,
+  FormHelperText,
   useToast,
   InputGroup,
 } from '@chakra-ui/react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 import LoginWithGoogle from '@/components/LoginWithGoogle';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '@/utils/regex';
@@ -120,22 +120,24 @@ function Login() {
 
   // Verify on first open if token is valid or not
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`${baseUrl}api/v1/auth/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const verifyResult = await response.status;
-      if (verifyResult === 401) {
-        localStorage.removeItem('token');
-        dispatch(setUser({ name: null, email: null }));
-        navigate('/login');
-      }
-      if (verifyResult === 200) {
-        navigate('/');
-      }
-    })();
+    if (token) {
+      (async () => {
+        const response = await fetch(`${baseUrl}api/v1/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const verifyResult = await response.status;
+        if (verifyResult === 401) {
+          localStorage.removeItem('token');
+          dispatch(setUser({ name: null, email: null }));
+          navigate('/login');
+        }
+        if (verifyResult === 200) {
+          navigate('/');
+        }
+      })();
+    }
   }, []);
 
   return (
@@ -159,27 +161,14 @@ function Login() {
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <InputGroup display="flex" flexDirection="column">
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={handlePassword}
-                  isRequired
-                  placeholder="Password"
-                />
-                <InputRightElement h="full">
-                  <Button variant="ghost" onClick={() => setShowPassword(() => !showPassword)}>
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-                <FormHelperText
-                  color="orange.400"
-                  display={PASSWORD_REGEX.test(password) || password.length < 8 ? 'none' : 'block'}
-                  w="290px"
-                >
-                  Password min 8 characters long, contain uppercase, lowercase, & special characters
-                </FormHelperText>
-              </InputGroup>
+              <Input type="password" value={password} onChange={handlePassword} isRequired placeholder="Password" />
+              <FormHelperText
+                color="orange.400"
+                display={PASSWORD_REGEX.test(password) || password.length < 8 ? 'none' : 'block'}
+                w="290px"
+              >
+                Password min 8 characters long, contain uppercase, lowercase, & special characters
+              </FormHelperText>
             </FormControl>
             <Button
               bg="blue.400"
