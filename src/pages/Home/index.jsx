@@ -13,7 +13,6 @@ import {
 import { useDispatch } from 'react-redux';
 
 import CardSkeleton from '@/components/CardSkeleton';
-import CircularRating from '@/components/CircularRating';
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
 import HeroMovie from '@/components/HeroMovie';
@@ -57,21 +56,23 @@ function Home() {
 
   // Verify on first open if token is valid or not
   useEffect(() => {
-    (async () => {
-      const response = await fetch(`${import.meta.env.VITE_AUTH_URL}api/v1/auth/me`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const verifyResult = await response.status;
-      if (verifyResult === 401) {
-        localStorage.removeItem('token');
-        dispatch(setUser({ name: null, email: null }));
-      }
-      if (verifyResult === 200) {
-        navigate('/');
-      }
-    })();
+    if (token) {
+      (async () => {
+        const response = await fetch(`${import.meta.env.VITE_AUTH_URL}api/v1/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const verifyResult = await response.status;
+        if (verifyResult === 401) {
+          localStorage.removeItem('token');
+          dispatch(setUser({ name: null, email: null }));
+        }
+        if (verifyResult === 200) {
+          navigate('/');
+        }
+      })();
+    }
   }, []);
 
   return (
@@ -99,7 +100,6 @@ function Home() {
             movies?.results?.map((movie) => (
               <SplideSlide key={movie.id}>
                 <CardMovie data={movie} mediaType="movie" />
-                <CircularRating data={movie.vote_average} />
               </SplideSlide>
             ))
           ) : (
@@ -119,7 +119,6 @@ function Home() {
             tvSeries?.results?.map((tv) => (
               <SplideSlide key={tv.id}>
                 <CardMovie data={tv} mediaType="tv" />
-                <CircularRating data={tv.vote_average} />
               </SplideSlide>
             ))
           ) : (
