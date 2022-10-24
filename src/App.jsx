@@ -26,11 +26,7 @@ function App() {
       />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route
-        path="/movie"
-        // prettier-ignore
-        element={<Movie />}
-      />
+      <Route path="/movie" element={<Movie />} />
       <Route path="/search" element={<SearchResult />} />
       <Route path="/tv" element={<Tv />} />
       <Route path="*" element={<NotFound />} />
