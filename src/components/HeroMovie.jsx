@@ -17,21 +17,23 @@ import {
 } from '@chakra-ui/react';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
+import slugGenerator from '@/utils/slugGenerator';
+
 function HeroMovie({ movie }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [videos, setVideos] = useState(null);
   const [movieId, setMovieId] = useState('');
   const [mediaType, setMediaType] = useState('');
 
-  const videoUrl = videos?.filter(
-    (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
-  )[0].key;
+  const title = movie.name ?? movie.title ?? movie.original_name ?? movie.original_title;
+
+  const slug = slugGenerator(title);
+
+  const videoUrl = videos?.filter((vid) => vid.type === 'Trailer' && vid.site === 'YouTube')[0].key;
 
   const getVideo = async (_movieId, _mediaType) => {
     const response = await fetch(
-      `https://api.themoviedb.org/3/${_mediaType}/${_movieId}/videos?api_key=${
-        import.meta.env.VITE_TMDB_API_KEY
-      }`
+      `https://api.themoviedb.org/3/${_mediaType}/${_movieId}/videos?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
     );
     const result = await response.json();
     setVideos(result?.results);
@@ -42,8 +44,7 @@ function HeroMovie({ movie }) {
   }, [movieId, mediaType]);
 
   return (
-    // Add Slug at the end of this endpoint
-    <Link to={`/${movie.media_type}/${movie.id}`}>
+    <Link to={`/${movie.media_type}/${movie.id}-${slug}`}>
       <Box
         backgroundImage={`url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`}
         backgroundSize="cover"

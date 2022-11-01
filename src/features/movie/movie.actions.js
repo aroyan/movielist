@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import {
   _getAllMovies,
   _getAllSeries,
@@ -13,47 +12,72 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 
 // prettier-ignore
 export const getAllMovies = (page = 1) => async (dispatch) => {
-  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
-  const data = await response.json();
-
-  dispatch(_getAllMovies(data));
+  try {
+    const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
+    const data = await response.json();
+  
+    dispatch(_getAllMovies(data));  
+  } catch (error) {
+    // maybe set to Redux state
+    return error.message;
+  }
 };
 
 // prettier-ignore
 export const getAllSeries = (page = 1) => async (dispatch) => {
-  const response = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`);
-  const data = await response.json();
-
-  dispatch(_getAllSeries(data));
+  try {
+    const response = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`);
+    const data = await response.json();
+  
+    dispatch(_getAllSeries(data)); 
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getWeeklyTrending = () => async (dispatch) => {
-  const response = await fetch(`${BASE_URL}/trending/all/week?api_key=${API_KEY}`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`${BASE_URL}/trending/all/week?api_key=${API_KEY}`);
+    const data = await response.json();
 
-  dispatch(_getWeeklyTrending(data));
+    dispatch(_getWeeklyTrending(data));
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getDetailData = (media, id) => async (dispatch) => {
-  const response = await fetch(`${BASE_URL}/${media}/${id}?api_key=${API_KEY}`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`${BASE_URL}/${media}/${id}?api_key=${API_KEY}`);
+    const data = await response.json();
 
-  dispatch(_getDetailData(data));
+    dispatch(_getDetailData(data));
+  } catch (error) {
+    return error.message;
+  }
 };
 
 export const getTrailer = (media, id) => async (dispatch) => {
-  const response = await fetch(`${BASE_URL}/${media}/${id}/videos?api_key=${API_KEY}`);
-  const data = await response.json();
+  try {
+    const response = await fetch(`${BASE_URL}/${media}/${id}/videos?api_key=${API_KEY}`);
+    const data = await response.json();
 
-  dispatch(_getTrailer(data));
+    dispatch(_getTrailer(data));
+  } catch (error) {
+    return error.message;
+  }
 };
 
 // prettier-ignore
 export const getSearchData = (q, page = 1) => async (dispatch) => {
-  const response = await fetch(
-    `${BASE_URL}/search/multi?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${q}`
-  );
-  const data = await response.json();
-
-  dispatch(_getSearchData(data));
+  try {
+    const response = await fetch(
+      `${BASE_URL}/search/multi?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false&query=${q}`
+    );
+    const data = await response.json();
+  
+    dispatch(_getSearchData(data));
+  } catch (error) {
+    return error.message
+  }
 };
