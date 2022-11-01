@@ -1,4 +1,4 @@
-# Challenge 5 & 6 | Movie Lists & Authentication
+# Challenge 5, 6, & 7 | Movie Lists, Authentication, Redux Toolkit
 
 > [Live Preview](https://whyw.vercel.app/)
 
@@ -9,9 +9,14 @@
 
 ## Acknowledgments
 
-- [Chakra UI](https://chakra-ui.com/)
-- [Chakra Templates](https://chakra-templates.dev/)
-- [React](https://reactjs.org/)
+- [Chakra UI](https://chakra-ui.com)
+- [Chakra Templates](https://chakra-templates.dev)
+- [ESLint](https://eslint.org)
+- [Prettier](https://prettier.io)
+- [React](https://reactjs.org)
 - [React Router](https://reactrouter.com/en/main)
-- [SplideJS](https://splidejs.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org)
+- [SplideJS](https://splidejs.com)
 - [TMDB API](https://www.themoviedb.org/documentation/api)
+- [Vercel](https://vercel.com)
+- [Vite](https://vitejs.dev)
