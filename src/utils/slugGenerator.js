@@ -1,10 +1,9 @@
-function slugGenerator(str) {
-  return str
-    .replace(/[`~!@#$%^&*()_\-+=\[\]{};:'"\\|\/,.<>?\s]/g, ' ')
+const slugGenerator = (str) =>
+  str
     .toLowerCase()
-    .split(' ')
-    .join('-')
-    .replace(/^-+|-+(?=-|$)/g, '');
-}
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
 export default slugGenerator;

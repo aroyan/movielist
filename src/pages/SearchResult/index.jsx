@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 
 import Layout from '@/components/Layout';
+import CardMovie from '@/components/CardMovie';
 import { getSearchData } from '@/features/movie/movie.actions';
 
 function SearchResult() {
@@ -58,17 +59,7 @@ function SearchResult() {
         <Flex my="1rem" wrap="wrap" gap={{ base: '1rem', md: '2rem' }} justify="center">
           {filteredData?.map((res) => (
             <Box key={res.id} width={{ base: '150px', md: '200px' }} boxShadow="md" rounded="lg">
-              <Link to={`/${res.media_type}/${res.id}`} as={NavLink}>
-                <Image
-                  rounded="lg"
-                  src={`https://image.tmdb.org/t/p/w500${res.poster_path}`}
-                  fallbackSrc="https://res.cloudinary.com/dmgrxm78p/image/upload/v1665148820/poster_not_found.png"
-                  alt={res.title ?? res.name}
-                  objectFit="cover"
-                  width="200"
-                />
-                <Text>{res.name ?? res.original_name}</Text>
-              </Link>
+              <CardMovie data={res} mediaType={res.media_type} />
             </Box>
           ))}
         </Flex>
