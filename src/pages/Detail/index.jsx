@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Button,
@@ -21,14 +22,20 @@ import { TriangleDownIcon, StarIcon } from '@chakra-ui/icons';
 
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
-import { useGetTrailerQuery, useGetDetailDataQuery } from '@/features/movie/movieSlice';
+import { getTrailer, getDetailData } from '@/features/movie/movie.actions';
 
 function Detail() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { media, id } = useParams();
+  const dispatch = useDispatch();
 
-  const { data: trailerData } = useGetTrailerQuery({ media, id });
-  const { data } = useGetDetailDataQuery({ media, id });
+  const data = useSelector((state) => state.movie.detail);
+  const trailerData = useSelector((state) => state.movie.trailer);
+
+  useEffect(() => {
+    dispatch(getDetailData(media, id));
+    dispatch(getTrailer(media, id));
+  }, []);
 
   const videoUrl = trailerData?.results?.filter((vid) => vid.type === 'Trailer' && vid.site === 'YouTube')[0]?.key;
 

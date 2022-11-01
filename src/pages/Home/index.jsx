@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Flex,
@@ -10,20 +11,19 @@ import {
   Link,
   //
 } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
 
 import CardSkeleton from '@/components/CardSkeleton';
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
 import HeroMovie from '@/components/HeroMovie';
 import CardMovie from '@/components/CardMovie';
-import { useGetAllMoviesQuery, useGetAllSeriesQuery, useGetWeeklyTrendingQuery } from '@/features/movie/movieSlice';
+import { getAllMovies, getAllSeries, getWeeklyTrending } from '@/features/movie/movie.actions';
 import { setUser } from '@/features/user/userSlice';
 
 function Home() {
-  const { data: movies } = useGetAllMoviesQuery();
-  const { data: tvSeries } = useGetAllSeriesQuery();
-  const { data: trending } = useGetWeeklyTrendingQuery();
+  const movies = useSelector((state) => state.movie.movies);
+  const tvSeries = useSelector((state) => state.movie.series);
+  const trending = useSelector((state) => state.movie.weekly);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,6 +51,12 @@ function Home() {
     autoplay: true,
     interval: 5000,
   };
+
+  useEffect(() => {
+    dispatch(getAllMovies());
+    dispatch(getAllSeries());
+    dispatch(getWeeklyTrending());
+  }, []);
 
   const token = localStorage.getItem('token');
 
