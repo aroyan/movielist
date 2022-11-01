@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Button,
@@ -13,17 +14,17 @@ import {
 } from '@chakra-ui/react';
 
 import Layout from '@/components/Layout';
-import { useGetSearchDataQuery } from '@/features/movie/movieSlice';
+import { getSearchData } from '@/features/movie/movie.actions';
 
 function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams({
     page: 1,
   });
 
+  const data = useSelector((state) => state.movie.search);
+  const dispatch = useDispatch();
   const query = searchParams.get('q');
   const page = searchParams.get('page');
-
-  const { data } = useGetSearchDataQuery({ q: query, page });
 
   const filteredData = data?.results?.filter((item) => item.media_type !== 'person') ?? [];
 
@@ -42,6 +43,10 @@ function SearchResult() {
       page: +searchParams.get('page') + 1,
     });
   };
+
+  useEffect(() => {
+    dispatch(getSearchData(query, page));
+  }, [page, query]);
 
   return (
     <Layout>

@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   name: null,
   email: null,
+  token: localStorage.getItem('token'),
 };
 
 export const userSlice = createSlice({
@@ -14,6 +15,7 @@ export const userSlice = createSlice({
       const { name, email } = action.payload;
       state.name = name;
       state.email = email;
+      state.token = localStorage.getItem('token');
     },
   },
 });
