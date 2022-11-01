@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setUser } from '@/features/user/userSlice';
 
 function Protected({ children }) {
-  const token = localStorage.getItem('token');
+  const token = useSelector((state) => state.user.token);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function Protected({ children }) {
         }
       }
     })();
-  }, []);
+  }, [token]);
 
   if (!token) {
     return <Navigate to="/login" />;

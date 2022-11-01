@@ -1,38 +1,48 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
 
-const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+const initialState = {
+  movies: [],
+  series: [],
+  weekly: [],
+  detail: null,
+  trailer: null,
+  search: [],
+};
 
-export const movieApi = createApi({
-  reducerPath: 'movieApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3/' }),
-  endpoints: (builder) => ({
-    getAllMovies: builder.query({
-      query: (page = 1) => `movie/popular?api_key=${apiKey}&page=${page}`,
-    }),
-    getAllSeries: builder.query({
-      query: (page = 1) => `tv/popular?api_key=${apiKey}&page=${page}`,
-    }),
-    getWeeklyTrending: builder.query({
-      query: () => `trending/all/week?api_key=${apiKey}`,
-    }),
-    getDetailData: builder.query({
-      query: ({ media, id }) => `${media}/${id}?api_key=${apiKey}`,
-    }),
-    getTrailer: builder.query({
-      query: ({ media, id }) => `${media}/${id}/videos?api_key=${apiKey}`,
-    }),
-    // prettier-ignore
-    getSearchData: builder.query({
-      query: ({ q, page = 1 }) => `search/multi?api_key=${apiKey}&language=en-US&page=${page}&include_adult=false&query=${q}`,
-    }),
-  }),
+export const movieSlice = createSlice({
+  name: 'movie',
+  initialState,
+  reducers: {
+    _getAllMovies: (state, action) => {
+      state.movies = action.payload;
+    },
+    _getAllSeries: (state, action) => {
+      state.series = action.payload;
+    },
+    _getWeeklyTrending: (state, action) => {
+      state.weekly = action.payload;
+    },
+    _getDetailData: (state, action) => {
+      state.detail = action.payload;
+    },
+    _getTrailer: (state, action) => {
+      state.trailer = action.payload;
+    },
+    _getSearchData: (state, action) => {
+      state.search = action.payload;
+    },
+  },
 });
 
 export const {
-  useGetAllMoviesQuery,
-  useGetAllSeriesQuery,
-  useGetWeeklyTrendingQuery,
-  useGetDetailDataQuery,
-  useGetTrailerQuery,
-  useGetSearchDataQuery,
-} = movieApi;
+  _getAllMovies,
+  _getAllSeries,
+  _getDetailData,
+  _getSearchData,
+  _getTrailer,
+  _getWeeklyTrending,
+  //
+} = movieSlice.actions;
+
+export default movieSlice.reducer;

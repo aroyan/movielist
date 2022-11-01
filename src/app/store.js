@@ -12,7 +12,7 @@ import {
   //
 } from 'redux-persist';
 
-import { movieApi } from '@/features/movie/movieSlice';
+import movieReducer from '@/features/movie/movieSlice';
 import userReducer from '@/features/user/userSlice';
 
 const persistConfig = {
@@ -23,7 +23,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   user: userReducer,
-  [movieApi.reducerPath]: movieApi.reducer,
+  movie: movieReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
@@ -35,7 +35,7 @@ const store = configureStore({
     serializableCheck: {
       ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }).concat(movieApi.middleware),
+  }),
   devTools: process.env.NODE_ENV === 'development',
 });
 

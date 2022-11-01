@@ -17,6 +17,6 @@
     "comma-dangle": "off",
     "react/jsx-one-expression-per-line": [0],
     "import/no-unresolved": [2, { "ignore": ["@/"] }],
-    "import/extensions": [2, { "ignore": ["@/"] }]
+    "import/extensions": [2, { "ignore": ["@/"] }, { "ignorePackages": true }]
   }
 }
