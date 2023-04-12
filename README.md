@@ -1,4 +1,4 @@
-# Challenge 5, 6, & 7 | Movie Lists, Authentication, Redux Toolkit
+# Movie Lists with Redux Toolkit
 
 > [Live Preview](https://whyw.vercel.app)
 
