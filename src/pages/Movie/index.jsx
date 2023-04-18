@@ -17,7 +17,7 @@ import CardMovie from '@/components/CardMovie';
 import Layout from '@/components/Layout';
 import { getAllMovies } from '@/features/movie/movie.actions';
 
-function Movie() {
+export function Movie() {
   const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
 
   const dispatch = useDispatch();
@@ -77,5 +77,3 @@ function Movie() {
     </Layout>
   );
 }
-
-export default Movie;

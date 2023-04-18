@@ -24,7 +24,7 @@ import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
 import { getTrailer, getDetailData } from '@/features/movie/movie.actions';
 
-function Detail() {
+export function Detail() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { media, id } = useParams();
   const dispatch = useDispatch();
@@ -133,5 +133,3 @@ function Detail() {
     </Layout>
   );
 }
-
-export default Detail;

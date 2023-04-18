@@ -20,7 +20,7 @@ import CardMovie from '@/components/CardMovie';
 import { getAllMovies, getAllSeries, getWeeklyTrending } from '@/features/movie/movie.actions';
 import { setUser } from '@/features/user/userSlice';
 
-function Home() {
+export function Home() {
   const movies = useSelector((state) => state.movie.movies);
   const tvSeries = useSelector((state) => state.movie.series);
   const trending = useSelector((state) => state.movie.weekly);
@@ -135,5 +135,3 @@ function Home() {
     </Layout>
   );
 }
-
-export default Home;

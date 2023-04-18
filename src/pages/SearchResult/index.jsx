@@ -17,7 +17,7 @@ import Layout from '@/components/Layout';
 import CardMovie from '@/components/CardMovie';
 import { getSearchData } from '@/features/movie/movie.actions';
 
-function SearchResult() {
+export function SearchResult() {
   const [searchParams, setSearchParams] = useSearchParams({
     page: 1,
   });
@@ -93,5 +93,3 @@ function SearchResult() {
     </Layout>
   );
 }
-
-export default SearchResult;

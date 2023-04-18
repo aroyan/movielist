@@ -1,29 +1,22 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Detail from '@/pages/Detail';
-import Home from '@/pages/Home';
-import Login from '@/pages/Login';
-import Register from '@/pages/Register';
-import Movie from '@/pages/Movie';
-import NotFound from '@/pages/NotFound';
-import SearchResult from '@/pages/SearchResult';
-import Tv from '@/pages/Tv';
-import Protected from '@/components/Routes/Protected';
+import {
+  Detail,
+  Home,
+  Login,
+  Register,
+  Movie,
+  NotFound,
+  SearchResult,
+  Tv
+} from '@/pages';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route
-        path="/:media/:id"
-        // prettier-ignore
-        element={(
-          <Protected>
-            <Detail />
-          </Protected>
-      )}
-      />
+      <Route path="/:media/:id" element={(<Detail />)} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/movie" element={<Movie />} />

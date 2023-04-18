@@ -17,7 +17,7 @@ import Layout from '@/components/Layout';
 import CardMovie from '@/components/CardMovie';
 import { getAllSeries } from '@/features/movie/movie.actions';
 
-function Tv() {
+export function Tv() {
   const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
 
   const data = useSelector((state) => state.movie.series);
@@ -75,5 +75,3 @@ function Tv() {
     </Layout>
   );
 }
-
-export default Tv;

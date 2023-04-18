@@ -26,7 +26,7 @@ import { setUser } from '@/features/user/userSlice';
 
 const baseUrl = import.meta.env.VITE_AUTH_URL;
 
-export default function Register() {
+export function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

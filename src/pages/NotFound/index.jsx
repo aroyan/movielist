@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Center, Link, Text } from '@chakra-ui/react';
 
-function NotFound() {
+export function NotFound() {
   return (
     <Center width="100vw" height="100vh" flexDir="column">
       <Text>404 Not Found</Text>
@@ -26,5 +26,3 @@ function NotFound() {
     </Center>
   );
 }
-
-export default NotFound;

@@ -23,7 +23,7 @@ import { setUser } from '@/features/user/userSlice';
 
 const baseUrl = import.meta.env.VITE_AUTH_URL;
 
-function Login() {
+export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -190,5 +190,3 @@ function Login() {
     </Flex>
   );
 }
-
-export default Login;
