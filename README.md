@@ -41,14 +41,6 @@ Open [localhost](http://localhost:3000) in your browser
 
 ![Search Result Page](/images/search_result.png)
 
-- Login Page
-
-![Login Page](/images/login.png)
-
-- Register Page
-
-![Register Page](/images/register.png)
-
 ## Features
 
 - Search

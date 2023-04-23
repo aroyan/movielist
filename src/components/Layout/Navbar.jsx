@@ -92,7 +92,7 @@ export default function Navbar() {
             </HStack>
           ) : (
             <>
-              <Link as={NavLink} to="/login">
+              {/* <Link as={NavLink} to="/login">
                 <Button
                   variant="outline"
                   colorScheme="red"
@@ -109,7 +109,7 @@ export default function Navbar() {
                 <Button colorScheme="red" rounded="full" size="sm">
                   Register
                 </Button>
-              </Link>
+              </Link> */}
             </>
           )}
         </Box>
@@ -136,11 +136,11 @@ export default function Navbar() {
               />
             </InputGroup>
             <Box>
-              <Link as={NavLink} to="/login">
+              {/* <Link as={NavLink} to="/login">
                 <Button variant="solid" colorScheme="red" size="sm" mt={4} rounded="md" w="full">
                   Login
                 </Button>
-              </Link>
+              </Link> */}
             </Box>
           </FormControl>
         </Box>
