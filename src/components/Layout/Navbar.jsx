@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import {
   Box,
@@ -15,26 +16,10 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { setUser } from '@/features/user/userSlice';
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [query, setQuery] = useState('');
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const data = useSelector((state) => state.user);
-
-  const user = Boolean(data.name) && Boolean(data.email);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    dispatch(setUser({ name: '', email: '' }));
-  };
 
   return (
     <Box
@@ -57,7 +42,7 @@ export default function Navbar() {
           onClick={isOpen ? onClose : onOpen}
           colorScheme="red"
         />
-        <Heading color="red" fontSize="3xl" letterSpacing="-2px" as={NavLink} to="/">
+        <Heading color="red" fontSize="3xl" letterSpacing="-2px" to="/">
           MOVIELIST
         </Heading>
         <FormControl
@@ -82,37 +67,6 @@ export default function Navbar() {
             />
           </InputGroup>
         </FormControl>
-        <Box>
-          {user ? (
-            <HStack display={{ base: 'none', md: 'flex' }}>
-              <Text>Welcome {data?.name}</Text>
-              <Button onClick={handleLogout} colorScheme="red">
-                Logout
-              </Button>
-            </HStack>
-          ) : (
-            <>
-              {/* <Link as={NavLink} to="/login">
-                <Button
-                  variant="outline"
-                  colorScheme="red"
-                  size="sm"
-                  mr={4}
-                  rounded="full"
-                  display={{ base: 'none', md: 'inline-block' }}
-                  w="75px"
-                >
-                  Login
-                </Button>
-              </Link>
-              <Link as={NavLink} to="/register" _hover={{ textDecor: 'none' }}>
-                <Button colorScheme="red" rounded="full" size="sm">
-                  Register
-                </Button>
-              </Link> */}
-            </>
-          )}
-        </Box>
       </Flex>
 
       {isOpen ? (
@@ -135,13 +89,7 @@ export default function Navbar() {
                 required
               />
             </InputGroup>
-            <Box>
-              {/* <Link as={NavLink} to="/login">
-                <Button variant="solid" colorScheme="red" size="sm" mt={4} rounded="md" w="full">
-                  Login
-                </Button>
-              </Link> */}
-            </Box>
+            <Box></Box>
           </FormControl>
         </Box>
       ) : null}
