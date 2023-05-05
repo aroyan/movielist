@@ -1,0 +1,21 @@
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  position: relative;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  height: 100vh;
+}
+
+.show_information {
+  color: white;
+  max-width: 300px;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  bottom: 0;
+  left: 0;
+}
