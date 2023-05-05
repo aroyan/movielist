@@ -1,26 +1,9 @@
+'use client';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Box,
-  Button,
-  Heading,
-  Text,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  AspectRatio,
-  ModalHeader,
-  Flex,
-} from '@chakra-ui/react';
-import { TriangleDownIcon } from '@chakra-ui/icons';
 
 import slugGenerator from '@/utils/slugGenerator';
 
 function HeroMovie({ movie }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [videos, setVideos] = useState(null);
   const [movieId, setMovieId] = useState('');
   const [mediaType, setMediaType] = useState('');
@@ -44,40 +27,27 @@ function HeroMovie({ movie }) {
   }, [movieId, mediaType]);
 
   return (
-    <Link to={`/${movie.media_type}/${movie.id}-${slug}`}>
-      <Box
-        backgroundImage={`url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
+    <a href={`/${movie.media_type}/${movie.id}-${slug}`}>
+      <div
+        style={{ background: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})` }}
         width="100vw"
         height="100vh"
       >
-        <Box
-          color="white"
-          height="100vh"
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          background="rgba(0,0,0,0.5)"
-        >
-          <Flex maxW="xl" m="2rem" flexDir="column" gap="1rem">
-            <Heading>{movie.name ?? movie.title}</Heading>
-            <Text>{movie.overview}</Text>
-            <Button
+        <div>
+          <div>
+            <h1>{movie.name ?? movie.title}</h1>
+            <p>{movie.overview}</p>
+            <button
               onClick={(e) => {
                 e.preventDefault();
                 setMovieId(movie.id);
                 setMediaType(movie.media_type);
                 onOpen();
               }}
-              colorScheme="red"
-              width="48"
-              rightIcon={<TriangleDownIcon transform="rotate(-90deg)" />}
             >
               WATCH TRAILER
-            </Button>
-            <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+            </button>
+            {/* <Modal isOpen={isOpen} onClose={onClose} size="4xl">
               <ModalOverlay />
               <ModalContent background="rgba(0,0,0, 0.8)" pb="4">
                 <Box color="white">
@@ -94,11 +64,11 @@ function HeroMovie({ movie }) {
                   </AspectRatio>
                 </ModalBody>
               </ModalContent>
-            </Modal>
-          </Flex>
-        </Box>
-      </Box>
-    </Link>
+            </Modal> */}
+          </div>
+        </div>
+      </div>
+    </a>
   );
 }
 

@@ -1,42 +1,7 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Box,
-  Button,
-  Badge,
-  Heading,
-  HStack,
-  Text,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  AspectRatio,
-  ModalHeader,
-  Flex,
-} from '@chakra-ui/react';
-import { TriangleDownIcon, StarIcon } from '@chakra-ui/icons';
-
 import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
-import { getTrailer, getDetailData } from '@/features/movie/movie.actions';
 
 export function Detail() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { media, id } = useParams();
-  const dispatch = useDispatch();
-
-  const data = useSelector((state) => state.movie.detail);
-  const trailerData = useSelector((state) => state.movie.trailer);
-
-  useEffect(() => {
-    dispatch(getDetailData(media, id));
-    dispatch(getTrailer(media, id));
-  }, []);
-
   const videoUrl = trailerData?.results?.filter((vid) => vid.type === 'Trailer' && vid.site === 'YouTube')[0]?.key;
 
   const {
@@ -56,57 +21,39 @@ export function Detail() {
   return (
     <Layout>
       {data ? (
-        <Box
-          backgroundImage={`url(https://image.tmdb.org/t/p/original/${backdropPath})`}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          backgroundRepeat="no-repeat"
-          width="100vw"
-          height="100vh"
-        >
-          <Box
-            color="white"
-            height="100vh"
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            background="rgba(0,0,0,0.5)"
-          >
-            <Flex maxW="xl" m="2rem" flexDir="column" gap="1rem">
-              <Heading>
+        <div backgroundImage={`url(https://image.tmdb.org/t/p/original/${backdropPath})`}>
+          <div>
+            <div>
+              <h1>
                 {title ?? originalName}{' '}
                 <Badge colorScheme="green">{Number.isNaN(releaseYear) ? firstAirYear : releaseYear}</Badge>
-              </Heading>
-              <HStack wrap="wrap" gap="1">
+              </h1>
+              <div wrap="wrap" gap="1">
                 {genres?.map((genre) => (
                   <Badge key={genre.id} colorScheme="cyan">
                     {genre.name}
                   </Badge>
                 ))}
-              </HStack>
-              <Text>{overview}</Text>
-              <HStack>
-                <StarIcon />
-                <Text>{voteAverage ? voteAverage.toFixed(1) : 0} / 10</Text>
-              </HStack>
-              <Button
+              </div>
+              <p>{overview}</p>
+              <div>
+                <p>{voteAverage ? voteAverage.toFixed(1) : 0} / 10</p>
+              </div>
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   onOpen();
                 }}
-                colorScheme="red"
-                width="48"
-                rightIcon={<TriangleDownIcon transform="rotate(-90deg)" />}
               >
                 WATCH TRAILER
-              </Button>
-              <Modal isOpen={isOpen} onClose={onClose} size="4xl">
+              </button>
+              {/* <Modal isOpen={isOpen} onClose={onClose} size="4xl">
                 <ModalOverlay />
                 <ModalContent background="rgba(0,0,0, 0.8)" pb="4">
-                  <Box color="white">
+                  <div color="white">
                     <ModalCloseButton />
                     <ModalHeader>Play Trailer</ModalHeader>
-                  </Box>
+                  </div>
                   <ModalBody>
                     {videoUrl ? (
                       <AspectRatio maxW="720px" ratio={16 / 9} margin="0 auto">
@@ -123,10 +70,10 @@ export function Detail() {
                     )}
                   </ModalBody>
                 </ModalContent>
-              </Modal>
-            </Flex>
-          </Box>
-        </Box>
+              </Modal> */}
+            </div>
+          </div>
+        </div>
       ) : (
         <Loading />
       )}
