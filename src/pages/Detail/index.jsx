@@ -1,7 +1,6 @@
-import Layout from '@/components/Layout';
 import Loading from '@/components/Loading';
 
-export function Detail() {
+export default function Detail() {
   const videoUrl = trailerData?.results?.filter((vid) => vid.type === 'Trailer' && vid.site === 'YouTube')[0]?.key;
 
   const {
@@ -19,20 +18,17 @@ export function Detail() {
   const firstAirYear = new Date(firstAirDate).getFullYear();
 
   return (
-    <Layout>
+    <>
       {data ? (
         <div backgroundImage={`url(https://image.tmdb.org/t/p/original/${backdropPath})`}>
           <div>
             <div>
               <h1>
-                {title ?? originalName}{' '}
-                <Badge colorScheme="green">{Number.isNaN(releaseYear) ? firstAirYear : releaseYear}</Badge>
+                {title ?? originalName} <div>{Number.isNaN(releaseYear) ? firstAirYear : releaseYear}</div>
               </h1>
               <div wrap="wrap" gap="1">
                 {genres?.map((genre) => (
-                  <Badge key={genre.id} colorScheme="cyan">
-                    {genre.name}
-                  </Badge>
+                  <div key={genre.id}>{genre.name}</div>
                 ))}
               </div>
               <p>{overview}</p>
@@ -77,6 +73,6 @@ export function Detail() {
       ) : (
         <Loading />
       )}
-    </Layout>
+    </>
   );
 }

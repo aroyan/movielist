@@ -1,9 +1,8 @@
-import Layout from '@/components/Layout';
 import CardMovie from '@/components/CardMovie';
 
-export function SearchResult() {
+export default function SearchResult() {
   return (
-    <Layout>
+    <>
       <section>
         <h1>Search result for {query}</h1>
 
@@ -31,6 +30,6 @@ export function SearchResult() {
           </div>
         )}
       </section>
-    </Layout>
+    </>
   );
 }

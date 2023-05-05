@@ -22,10 +22,6 @@ function HeroMovie({ movie }) {
     setVideos(result?.results);
   };
 
-  useEffect(() => {
-    if (movieId && mediaType) getVideo(movieId, mediaType);
-  }, [movieId, mediaType]);
-
   return (
     <a href={`/${movie.media_type}/${movie.id}-${slug}`}>
       <div

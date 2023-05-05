@@ -1,9 +1,8 @@
 import CardMovie from '@/components/CardMovie';
-import Layout from '@/components/Layout';
 
-export function Movie() {
+export default function Movie() {
   return (
-    <Layout>
+    <>
       <section>
         <h1>Popular Movies</h1>
         <div>
@@ -17,6 +16,6 @@ export function Movie() {
           <br />
         </div>
       </section>
-    </Layout>
+    </>
   );
 }

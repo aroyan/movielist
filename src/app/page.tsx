@@ -1,10 +1,8 @@
-import Layout from '@/components/Layout';
-
-export default function Home() {
+export default function Page() {
   return (
-    <Layout>
-      <article >
-        <div >
+    <>
+      <article>
+        <div>
           <h2>Popular Movie</h2>
         </div>
       </article>
@@ -13,6 +11,6 @@ export default function Home() {
           <h2>Popular TV</h2>
         </div>
       </article>
-    </Layout>
+    </>
   );
 }

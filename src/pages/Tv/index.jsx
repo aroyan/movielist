@@ -1,9 +1,8 @@
-import Layout from '@/components/Layout';
 import CardMovie from '@/components/CardMovie';
 
-export function Tv() {
+export default function Tv() {
   return (
-    <Layout>
+    <>
       <section>
         <h1>Popular TV Series</h1>
         <div>
@@ -16,6 +15,6 @@ export function Tv() {
             : ''}
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
