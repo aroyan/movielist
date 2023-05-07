@@ -21,13 +21,6 @@ export default async function Page() {
       <article>
         <div>
           <h2>Popular TV</h2>
-          <iframe
-            width="100%"
-            height="auto"
-            src="https://www.youtube.com/embed/sxdDVAv6QDY?autoplay=1&controls=0&fs=1&modestbranding=1&showinfo=0&rel=0"
-            allow="autoplay"
-            allowFullScreen
-          ></iframe>
         </div>
       </article>
     </>

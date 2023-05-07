@@ -22,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               textDecoration: 'none',
               fontWeight: 'bold',
             }}
+            replace
           >
             Hello
           </Link>
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               textDecoration: 'none',
               fontWeight: 'bold',
             }}
+            replace
           >
             Nothing
           </Link>
