@@ -11,5 +11,22 @@ async function getDetailMovie(url: any) {
 export default async function Page({ params }: { params: { id: string } }) {
   const data = await getDetailMovie(params.id);
 
-  return <div>Detail movie {JSON.stringify(data)}</div>;
+  const {genres, overview, poster_path: posterPath, production_companies : productionCompanies, release_date: releaseDate, runtime, title, tagline} = data;
+
+  return <div>Detail movie
+
+    {genres.map((x: any) => <p>{x.name}</p>)}
+
+    <p>{overview}</p>
+
+    {productionCompanies.map((x: any) => <p>{x.name}</p>)}
+
+    <p>{releaseDate}</p>
+
+    <p>{runtime}</p>
+
+    <p>{title}</p>
+
+    <p>{tagline}</p>
+  </div>;
 }
