@@ -1,16 +1,14 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import {
-  Detail,
-  Home,
-  Login,
-  Register,
-  Movie,
-  NotFound,
-  SearchResult,
-  Tv
-} from '@/pages';
+import { Home } from './pages/Home'
+import { Detail } from './pages/Detail'
+import { Login } from './pages/Login'
+import { Movie } from './pages/Movie'
+import { NotFound } from './pages/NotFound'
+import { Register } from './pages/Register'
+import { SearchResult } from './pages/SearchResult'
+import { Tv } from './pages/Tv'
 
 function App() {
   return (

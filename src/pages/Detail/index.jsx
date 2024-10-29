@@ -48,6 +48,7 @@ export function Detail() {
     release_date: releaseDate,
     vote_average: voteAverage,
     genres,
+    tagline
   } = data ?? {};
 
   const releaseYear = new Date(releaseDate).getFullYear();
@@ -84,6 +85,7 @@ export function Detail() {
                   </Badge>
                 ))}
               </HStack>
+              <Heading as='h3' size='md'>{tagline}</Heading>
               <Text>{overview}</Text>
               <HStack>
                 <StarIcon />

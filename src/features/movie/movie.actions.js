@@ -57,6 +57,18 @@ export const getDetailData = (media, id) => async (dispatch) => {
   }
 };
 
+export const getCreditsData = (media, id) => async (dispatch) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${media}/${id}/credits?api_key=${API_KEY}`);
+    const data = await response.json();
+
+    dispatch(_getDetailData(data));
+  } catch (error) {
+    return error.message;
+  }
+};
+
+
 export const getTrailer = (media, id) => async (dispatch) => {
   try {
     const response = await fetch(`${BASE_URL}/${media}/${id}/videos?api_key=${API_KEY}`);
