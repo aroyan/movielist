@@ -113,7 +113,7 @@ export function Detail() {
                     {videoUrl ? (
                       <AspectRatio maxW="720px" ratio={16 / 9} margin="0 auto">
                         <iframe
-                          src={`https://www.youtube.com/embed/${videoUrl}&mute=1`}
+                          src={`https://www.youtube.com/embed/${videoUrl}`}
                           title={data.title ?? data.name}
                           allow="autoplay; fullscreen;"
                         />
